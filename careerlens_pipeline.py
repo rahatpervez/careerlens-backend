@@ -30,7 +30,6 @@ TECH_SUPPLEMENT = [
     "python", "java", "javascript", "typescript", "sql", "php", "c++", "c#",
     "ruby", "scala", "perl", "matlab", "bash", "html", "css", "golang", "rust",
     "redux", "webpack", "sagemaker",
-    # QA / SQA specific additions
     "selenium", "postman", "jira", "appium", "cypress", "playwright",
     "junit", "testng", "manual testing", "automated testing", "automation testing",
     "test cases", "test case design", "test planning", "test plan",
@@ -59,7 +58,7 @@ def build_skill_matcher(esco_csv_path):
     """Build the ESCO + tech-supplement PhraseMatcher for skill extraction."""
     import pandas as pd
     esco_df = pd.read_csv(esco_csv_path)
-   nlp = spacy.load("en_core_web_sm", exclude=["tok2vec", "tagger", "parser", "attribute_ruler", "lemmatizer", "ner"])
+    nlp = spacy.load("en_core_web_sm", exclude=["tok2vec", "tagger", "parser", "attribute_ruler", "lemmatizer", "ner"])
     matcher = PhraseMatcher(nlp.vocab, attr="LOWER")
 
     skill_terms = set(TECH_SUPPLEMENT)
