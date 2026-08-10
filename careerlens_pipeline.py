@@ -46,10 +46,8 @@ TECH_SUPPLEMENT = [
 def load_model(device=None):
     """Load the main fit-classification model and tokenizer from Hugging Face Hub."""
     device = device or torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = AutoModelForSequenceClassification.from_pretrained(HF_REPO, low_cpu_mem_usage=True).to(device)
+    model = AutoModelForSequenceClassification.from_pretrained(HF_REPO).to(device)
     model.eval()
-    if device.type == "cpu":
-        model = torch.quantization.quantize_dynamic(model, {torch.nn.Linear}, dtype=torch.qint8)
     tokenizer = AutoTokenizer.from_pretrained(HF_REPO)
     return model, tokenizer, device
 
